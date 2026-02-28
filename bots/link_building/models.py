@@ -32,7 +32,7 @@ class OutreachProspect(Base):
     outreach_email_subject = Column(String(300), default="")
     outreach_email_body = Column(Text, default="")
     notes = Column(Text, default="")
-    discovered_at = Column(DateTime, default=datetime.utcnow)
+    discovered_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
     contacted_at = Column(DateTime, nullable=True)
     replied_at = Column(DateTime, nullable=True)
     link_secured_at = Column(DateTime, nullable=True)
