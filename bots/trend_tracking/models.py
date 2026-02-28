@@ -1,7 +1,7 @@
 """Pydantic models for the Trend Tracking bot."""
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 from pydantic import BaseModel, Field
 
@@ -18,4 +18,4 @@ class WeeklyTrendReport(BaseModel):
     week_of: str
     trends: list[TrendItem] = Field(default_factory=list)
     top_opportunities: list[str] = Field(default_factory=list)
-    generated_at: datetime = Field(default_factory=datetime.utcnow)
+    generated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))

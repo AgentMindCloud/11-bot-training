@@ -1,7 +1,7 @@
 """Pydantic models for the Content Creation bot."""
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Literal
 
 from pydantic import BaseModel, Field, computed_field
@@ -35,4 +35,4 @@ class SocialSnippet(BaseModel):
 class ContentOutput(BaseModel):
     blog_posts: list[BlogPost] = Field(default_factory=list)
     social_snippets: list[SocialSnippet] = Field(default_factory=list)
-    generated_at: datetime = Field(default_factory=datetime.utcnow)
+    generated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))

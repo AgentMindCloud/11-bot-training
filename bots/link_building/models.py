@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import enum
-from datetime import datetime
+from datetime import datetime, timezone
 
 from pydantic import BaseModel, Field
 
@@ -35,4 +35,4 @@ class OutreachEmail(BaseModel):
 class LinkBuildingOutput(BaseModel):
     prospects: list[LinkProspect] = Field(default_factory=list)
     outreach_emails: list[OutreachEmail] = Field(default_factory=list)
-    generated_at: datetime = Field(default_factory=datetime.utcnow)
+    generated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))

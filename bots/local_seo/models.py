@@ -1,7 +1,7 @@
 """Pydantic models for the Local SEO bot."""
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 from pydantic import BaseModel, Field
 
@@ -36,4 +36,4 @@ class LocalSeoOutput(BaseModel):
     keyword_clusters: list[KeywordCluster] = Field(default_factory=list)
     seo_metas: list[SeoMeta] = Field(default_factory=list)
     internal_links: list[InternalLinkSuggestion] = Field(default_factory=list)
-    generated_at: datetime = Field(default_factory=datetime.utcnow)
+    generated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))

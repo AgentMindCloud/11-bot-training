@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import enum
-from datetime import datetime
+from datetime import datetime, timezone
 
 from pydantic import BaseModel, Field
 
@@ -34,4 +34,4 @@ class ExecutiveSummary(BaseModel):
     bot_summaries: list[BotSummary] = Field(default_factory=list)
     top_tasks: list[ActionableTask] = Field(default_factory=list)
     report_markdown: str = ""
-    generated_at: datetime = Field(default_factory=datetime.utcnow)
+    generated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
